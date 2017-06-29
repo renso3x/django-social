@@ -7,7 +7,7 @@ from django.utils.text import slugify
 
 import misaka
 
-import django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 User = get_user_model()
 
 from django import template
@@ -20,7 +20,7 @@ class Group(models.Model):
 	description_html = models.TextField(editable=False, default='', blank=True)
 	members = models.ManyToManyField(User, through='GroupMember')
 
-	def __str_(self):
+	def __str__(self):
 		return self.name
 
 	def save(self, *args, **kwargs):
@@ -31,7 +31,7 @@ class Group(models.Model):
 	def get_absolute_url(self):
 		return reverse('groups:single', kwargs={'slug': self.slug})
 
-	def Meta:
+	def Meta():
 		ordering = ['name']
 
 class GroupMember(models.Model):
@@ -41,5 +41,5 @@ class GroupMember(models.Model):
 	def __str__(self):
 		return self.user.username
 
-	class Meta:
+	class Meta():
 		unique_together = ('group', 'user')
